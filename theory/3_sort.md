@@ -66,10 +66,44 @@ public static void main(String[] args) {
 ````
 
 ##  3.Insertion Sort
+
 ````
-- Xây sorted array từng bước -> Chèn phần tử vào đúng vị trí
+- Tay trái luôn giữ 1 dãy đã sort
+- Lấy từng phần tử từ bên phải
+- Chèn vào đúng vị trí trong dãy đã sort (dịch các phần tử lớn hơn sang phải)
+
+Mảng: [5, 3, 4, 1]
+Bước 1: [5] | 3 4 1
+Bước 2: chèn 3 → [3, 5]
+Bước 3: chèn 4 → [3, 4, 5]
+Bước 4: chèn 1 → [1, 3, 4, 5]
+````
+
+````
 - Độ phức tạp trung bình là O(n2)
 - Khi mảng đã sort gần xong hoặc ít index thì độ phức tạp còn O(N)
+````
+
+````
+public static void main(String[] args) {
+	int arr[] = new int[]{3,1,5,3,2,4,7,4323,6};
+	
+	for(int i = 1; i < arr.length; i++){
+	    int key = arr[i];
+	    int j = i - 1;
+	    
+	    while(j >= 0 && arr[j] > key){
+	        arr[j+1] = arr[j];
+	        j--;
+	    }
+	    
+	    arr[j+1] = key;
+	}
+	
+	for(int num: arr){
+        System.out.printf("%d-", num);
+    }
+}
 ````
 
 
