@@ -1,5 +1,4 @@
-# ARRAY & SLIDING WINDOW
-
+# ARRAY 
 ## 1. ArrayList lưu dữ liệu kiểu gì?
 ````
 Dùng mảng động (dynamic array)
@@ -21,6 +20,7 @@ Dùng mảng động (dynamic array)
 | add() bình thường | O(1)       |
 | add() khi resize  | O(n)       |
 
+-> add() có amortized O(1)
 -> quy trình add:
 1. thực hiện kiểm tra size nếu >= capacity thì sẽ thực hiện resize -> lúc này độ phức tạp là O(n) vì cần copy sang mảng mới
 2. nếu size < capacity thì thực hiện add vào mảng 
@@ -29,6 +29,15 @@ Dùng mảng động (dynamic array)
         -> nếu add vào index ->  độ phức tạp sẽ là O(n) vì cần dịch các phần tử ra sau thêm một ô
     -> nhớ rằng delete trong mảng cũng y như vậy
 ````
+
+## 4. Initial capacity
+````
+new ArrayList()
+-> KHÔNG tạo mảng ngay
+-> chỉ khi add phần tử đầu tiên mới allocate (default = 10)
+````
+
+
 
 
 
