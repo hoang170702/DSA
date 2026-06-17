@@ -1,4 +1,4 @@
-# ARRAY 
+# SORT
 
 ## Có tất cả bao nhiêu loại sort từ dễ đến khó
 ````
@@ -14,95 +14,97 @@
 ````
 - So sánh từng cặp liền kề
 - Swap nếu sai thứ tự
-- Phần tử lớn nhất “nổi lên” cuối
-- Độ phức tạp trung bình là O(n2), còn nếu mảng được check early stop và ko cần sort thì O(n)
+- Sau mỗi vòng lặp, phần tử lớn nhất được đẩy về cuối
+- Average: O(n²)
+- Worst: O(n²)
+- Best: O(n) nếu có early stop
+- Space: O(1)
+- Stable: Có
 ````
 
 ````
-public static void main(String[] args) {
-        int arr[] = new int[]{3,1,5,3,2,4,7,4323,6};
-        int n = arr.length;
-        for(int i =0; i< n-1; i++){
-            for(int j=0; j< n-1-i;j++){
-                if(arr[j] > arr[j+1]){
-                    int temp = arr[j];
-                    arr[j] = arr[j+1];
-                    arr[j+1] = temp;
-                }        
-            }
+for(int i=0;i<n-1;i++){
+    for(int j=0;j<n-i-1;j++){
+        if(arr[j] > arr[j+1]){
+            swap(arr,j,j+1);
         }
-        for(int num: arr){
-            System.out.printf("%d-", num);
-        } 
     }
+}
 ````
 
 
 ##  2.Selection Sort
 ````
-- Tìm min -> Đổi lên đầu
-- Độ phức tạp trung bình là O(n2)
+- Tìm phần tử nhỏ nhất
+- Đổi lên đầu
+- Average: O(n²)
+- Worst: O(n²)
+- Best: O(n²)
+- Space: O(1)
+- Stable: Không
 ````
 
 ````
-public static void main(String[] args) {
-        int arr[] = new int[]{3,1,5,3,2,4,7,4323,6};
-        int n = arr.length;
-        for(int i =0; i< n; i++){
-            int minIndex = i;
-            for(int j=i+1; j< n;j++){
-                if(arr[j] < arr[minIndex]){
-                    minIndex = j;
-                }
-            }
-            int temp = arr[i];
-            arr[i] = arr[minIndex];
-            arr[minIndex] = temp;
-        }
-        for(int num: arr){
-            System.out.printf("%d-", num);
+for(int i=0;i<n-1;i++){
+    int min=i;
+
+    for(int j=i+1;j<n;j++){
+        if(arr[j]<arr[min]){
+            min=j;
         }
     }
+
+    swap(arr,i,min);
+}
 ````
 
 ##  3.Insertion Sort
-
 ````
-- Tay trái luôn giữ 1 dãy đã sort
+- Chia mảng thành:
+    + Bên trái: đã sort
+    + Bên phải: chưa sort
+
 - Lấy từng phần tử từ bên phải
-- Chèn vào đúng vị trí trong dãy đã sort (dịch các phần tử lớn hơn sang phải)
+- Chèn vào đúng vị trí trong phần đã sort
 
-Mảng: [5, 3, 4, 1]
-Bước 1: [5] | 3 4 1
-Bước 2: chèn 3 → [3, 5]
-Bước 3: chèn 4 → [3, 4, 5]
-Bước 4: chèn 1 → [1, 3, 4, 5]
-````
+Ví dụ:
 
-````
-- Độ phức tạp trung bình là O(n2)
-- Khi mảng đã sort gần xong hoặc ít index thì độ phức tạp còn O(N)
+5 3 4 1
+
+-> 5
+-> 3 5
+-> 3 4 5
+-> 1 3 4 5
 ````
 
 ````
-public static void main(String[] args) {
-	int arr[] = new int[]{3,1,5,3,2,4,7,4323,6};
-	
-	for(int i = 1; i < arr.length; i++){
-	    int key = arr[i];
-	    int j = i - 1;
-	    
-	    while(j >= 0 && arr[j] > key){
-	        arr[j+1] = arr[j];
-	        j--;
-	    }
-	    
-	    arr[j+1] = key;
-	}
-	
-	for(int num: arr){
-        System.out.printf("%d-", num);
+Average: O(n²)
+
+Worst:
+Mảng ngược hoàn toàn
+5 4 3 2 1
+=> O(n²)
+
+Best:
+Mảng đã sort sẵn
+1 2 3 4 5
+=> O(n)
+
+Space: O(1)
+Stable: Có
+````
+
+````
+for(int i=1;i<n;i++){
+    int key = arr[i];
+    int j = i - 1;
+
+    while(j >= 0 && arr[j] > key){
+        arr[j+1] = arr[j];
+        j--;
     }
+
+    arr[j+1] = key;
 }
 ````
 
