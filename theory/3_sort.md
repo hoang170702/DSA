@@ -5,9 +5,18 @@
 1. Bubble sort
 2. Selection sort
 3. Insertion sort
-4. Mergr sort
+4. Merge sort
 5. Quick sort
 6. Heap sort
+````
+
+## Thuật ngữ
+````
+Average: Độ phức tạp trung bình
+Worst: Trường hợp tệ nhất
+Best: trường hợp tốt nhất
+Space: Độ phức tạp không gian
+Stable: Giữ nguyên thứ tự các phần tử bằng nhau
 ````
 
 ## 1. Bubble sort - dễ nhất
@@ -23,12 +32,21 @@
 ````
 
 ````
-for(int i=0;i<n-1;i++){
-    for(int j=0;j<n-i-1;j++){
-        if(arr[j] > arr[j+1]){
-            swap(arr,j,j+1);
+for(int i = 0; i < arr.length - 1; i++) {
+
+    // Mỗi vòng lặp sẽ đưa 1 phần tử lớn nhất về cuối mảng
+    for(int j = 0; j < arr.length - i - 1; j++) {
+
+        // So sánh 2 phần tử liền kề
+        if(arr[j] > arr[j + 1]) {
+
+            // Nếu sai thứ tự thì đổi chỗ
+            swap(arr, j, j + 1);
         }
     }
+
+    // Sau vòng lặp này:
+    // arr[arr.length - i - 1] đã nằm đúng vị trí
 }
 ````
 
@@ -45,16 +63,24 @@ for(int i=0;i<n-1;i++){
 ````
 
 ````
-for(int i=0;i<n-1;i++){
-    int min=i;
+for(int i = 0; i < arr.length - 1; i++) {
 
-    for(int j=i+1;j<n;j++){
-        if(arr[j]<arr[min]){
-            min=j;
+    // Giả sử phần tử hiện tại là nhỏ nhất
+    int min = i;
+
+    // Duyệt phần chưa sort để tìm phần tử nhỏ nhất thực sự
+    for(int j = i + 1; j < arr.length; j++) {
+
+        // Nếu tìm thấy phần tử nhỏ hơn
+        if(arr[j] < arr[min]) {
+
+            // Cập nhật vị trí phần tử nhỏ nhất
+            min = j;
         }
     }
 
-    swap(arr,i,min);
+    // Đưa phần tử nhỏ nhất về đầu phần chưa sort
+    swap(arr, i, min);
 }
 ````
 
@@ -66,6 +92,7 @@ for(int i=0;i<n-1;i++){
 
 - Lấy từng phần tử từ bên phải
 - Chèn vào đúng vị trí trong phần đã sort
+- TimSort trong java dùng 2 loại sort, trong đó 1 cái là Insertion Sort :) -> tự tìm hiểu lý do và loại còn lại.
 
 Ví dụ:
 
@@ -95,17 +122,27 @@ Stable: Có
 ````
 
 ````
-for(int i=1;i<n;i++){
-    int key = arr[i];
-    int j = i - 1;
-
-    while(j >= 0 && arr[j] > key){
-        arr[j+1] = arr[j];
-        j--;
-    }
-
-    arr[j+1] = key;
+{
+    for(int i=1;i<arr.length;i++){
+        // lấy giá trị hiện tại để lưu giữ
+        int key = arr[i];
+            
+        // lấy vị trí giá trị trước đó để so sánh
+        int j = i -1;
+            
+        // check nếu giá trị trước đó > giá trị hiện tại
+        while(j >= 0 && arr[j] > key){
+            // thực hiện chèn lấy luôn vị trí
+            arr[j+1] = arr[j];
+               
+            // lùi j thêm 1 đơn vị để tiếp tục so sánh vs key, nếu như key vẫn < arr[j] thực hiện vòng lên để chèn tiếp
+            j--;
+        };
+           
+        // Chèn key vào vị trí phù hợp trong phần đã sort
+        arr[j+1] = key;
 }
 ````
 
 
+##  4.Merge Sort
