@@ -146,3 +146,130 @@ Stable: Có
 
 
 ##  4.Merge Sort
+````
+- Chia để trị
+- Divide and Conquer
+- Chia đôi liên tục
+- Merge lại theo thứ tự
+- Hàm sort thứ 2 sau Insertion mà TimSort dùng chính là Merge sort -> tìm hiểu lý do vì sao ko dùng mỗi MergeSort mà phải kết hợp thêm Insertion Sort
+
+
+Ví dụ:
+
+8 3 4 1
+-> 8 3 | 4 1
+
+-> 8 | 3
+   4 | 1
+
+-> 3 8
+   1 4
+
+-> 1 3 4 8
+````
+
+````
+- Average: O(n log n)
+- Worst: O(n log n)
+- Best: O(n log n)
+- Space: O(n)
+- Stable: Có
+````
+
+### Triển khai
+````
+public static void mergeSort(int[] arr, int left, int right) {
+
+        // Nếu mảng chỉ còn 1 phần tử hoặc không còn phần tử nào thì đã sort
+        if (left >= right) {
+            return;
+        }
+
+        // Tìm điểm giữa để chia mảng thành 2 nửa
+        int mid = left + (right - left) / 2;
+
+        // Sort nửa bên trái (đệ quy)
+        mergeSort(arr, left, mid);
+
+        // Sort nửa bên phải (đệ quy)
+        mergeSort(arr, mid + 1, right);
+
+        // Gộp 2 nửa đã sort lại với nhau
+        merge(arr, left, mid, right);
+}
+````
+
+````
+private static void merge(int[] arr, int left, int mid, int right) {
+
+        // Tính số lượng phần tử của mảng bên trái
+        int n1 = mid - left + 1;
+
+        // Tính số lượng phần tử của mảng bên phải
+        int n2 = right - mid;
+
+        // Tạo mảng tạm để lưu nửa bên trái
+        int[] leftArr = new int[n1];
+
+        // Tạo mảng tạm để lưu nửa bên phải
+        int[] rightArr = new int[n2];
+
+        // Copy dữ liệu từ mảng gốc sang mảng trái
+        for (int i = 0; i < n1; i++) {
+            leftArr[i] = arr[left + i];
+        }
+
+        // Copy dữ liệu từ mảng gốc sang mảng phải
+        for (int j = 0; j < n2; j++) {
+            rightArr[j] = arr[mid + 1 + j];
+        }
+
+        // i dùng để duyệt mảng trái
+        int i = 0;
+
+        // j dùng để duyệt mảng phải
+        int j = 0;
+
+        // k dùng để ghi dữ liệu trở lại mảng gốc
+        int k = left;
+
+        // So sánh từng phần tử của 2 mảng trái/phải
+        while (i < n1 && j < n2) {
+
+            // Nếu phần tử bên trái nhỏ hơn hoặc bằng bên phải
+            if (leftArr[i] <= rightArr[j]) {
+
+                // Ghi phần tử bên trái vào mảng gốc
+                arr[k] = leftArr[i];
+
+                // Tăng i để qua phần tử tiếp theo của mảng trái
+                i++;
+            } else {
+
+                // Ghi phần tử bên phải vào mảng gốc
+                arr[k] = rightArr[j];
+
+                // Tăng j để qua phần tử tiếp theo của mảng phải
+                j++;
+            }
+
+            // Tăng k để ghi vào vị trí tiếp theo của mảng gốc
+            k++;
+        }
+
+        // Nếu mảng trái còn phần tử thì copy hết vào mảng gốc
+        while (i < n1) {
+            arr[k] = leftArr[i];
+            i++;
+            k++;
+        }
+
+        // Nếu mảng phải còn phần tử thì copy hết vào mảng gốc
+        while (j < n2) {
+            arr[k] = rightArr[j];
+            j++;
+            k++;
+        }
+    }
+}
+````
