@@ -419,7 +419,28 @@ Ví dụ:
 ````
 -> Heap Sort dùng Max Heap
 ````
+### Độ phức tạp
+````
+- Average: O(n log n)
+- Worst: O(n log n)
+- Best: O(n log n)
+- Space: O(1)
+- Stable: Không
+````
 
+### Inteview
+````
+Tại sao không dùng Heap Sort thay Quick Sort?
+
+Heap Sort:
+- Worst tốt
+- O(1) memory
+
+Nhưng:
+- Cache locality kém
+- Nhiều lần nhảy index
+- Thực tế thường chậm hơn Quick Sort
+````
 ### Các bước thực hiện
 ````
 Bước 1
