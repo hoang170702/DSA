@@ -393,5 +393,121 @@ private static int partition(int[] arr, int low, int high){
 }
 ````
 
+## Heap Sort
+### Heap là gì?
+````
+Ví dụ:
 
+      9
+    /   \
+   7     8
+  / \   /
+ 3   1 4
 
+ -> Đây là Max Heap vì Cha luôn >= con
+````
+
+````
+      1
+    /   \
+   3     4
+  / \   /
+ 7   8 9
+-> Đây là Min Heap vì Cha luôn <= con
+````
+
+````
+-> Heap Sort dùng Max Heap
+````
+
+### Các bước thực hiện
+````
+Bước 1
+
+Xây Max Heap
+
+        9
+      /   \
+     8     5
+    / \   /
+   4  1  3
+````
+
+````
+Bước 2
+
+Lấy phần tử lớn nhất
+-> Đưa về cuối mảng
+
+8 5 3 4 1 | 9
+````
+
+````
+Bước 3
+
+Heapify lại
+
+        8
+      /   \
+     4     5
+    / \
+   3   1
+````
+
+````
+Bước 4
+
+Lấy max tiếp -> đưa về cuối -> lặp lại
+````
+
+````
+Kết quả: 1 3 4 5 8 9
+````
+
+### Triển khai
+````
+public static void heapSort(int[] arr){
+
+    int n = arr.length;
+
+    // Xây dựng Max Heap
+    for(int i = n / 2 - 1; i >= 0; i--){
+        heapify(arr, n, i);
+    }
+
+    // Đưa phần tử lớn nhất về cuối mảng
+    for(int i = n - 1; i > 0; i--){
+
+        swap(arr, 0, i);
+
+        // Heapify lại phần còn lại
+        heapify(arr, i, 0);
+    }
+}
+````
+
+````
+private static void heapify(int[] arr, int n, int root){
+
+    int largest = root;
+
+    int left = 2 * root + 1;
+
+    int right = 2 * root + 2;
+
+    if(left < n && arr[left] > arr[largest]){
+        largest = left;
+    }
+
+    if(right < n && arr[right] > arr[largest]){
+        largest = right;
+    }
+
+    if(largest != root){
+
+        swap(arr, root, largest);
+
+        heapify(arr, n, largest);
+    }
+}
+````
