@@ -273,3 +273,125 @@ private static void merge(int[] arr, int left, int mid, int right) {
     }
 }
 ````
+
+
+## Quick sort
+````
+Không chia đôi cố định như Merge Sort.
+Quick Sort chọn một phần tử gọi là: Pivot
+
+Các số nhỏ hơn pivot -> bên trái
+
+Pivot -> ở giữa
+
+Các số lớn hơn pivot -> bên phải
+````
+
+````
+B1: 
+
+9 8 3 4 1 5
+
+pivot = 5
+
+Partition lần 1
+
+3 4 1 | 5 | 9 8
+        ^
+      pivot đã đúng vị trí
+````
+
+````
+B2:
+
+Tiếp tục sort bên trái
+
+3 4 1
+
+pivot = 1
+
+1 | 4 3
+^
+
+Tiếp tục sort bên phải
+
+4 3
+
+pivot = 3
+
+3 | 4
+^
+
+Kết quả bên trái
+
+1 3 4
+
+````
+
+````
+B3:
+
+Tiếp tục sort bên phải pivot ban đầu
+
+9 8
+
+pivot = 8
+
+8 | 9
+^
+
+Kết quả bên phải
+
+8 9
+
+Ghép lại
+
+1 3 4 | 5 | 8 9
+````
+
+### Triển khai
+````
+public static void quickSort(int[] arr, int low, int high){
+
+    if(low < high){
+
+        int pivotIndex = partition(arr, low, high);
+
+        quickSort(arr, low, pivotIndex - 1);
+
+        quickSort(arr, pivotIndex + 1, high);
+    }
+}
+````
+
+````
+private static int partition(int[] arr, int low, int high){
+
+    // Chọn phần tử cuối làm pivot
+    int pivot = arr[high];
+
+    // Vị trí cuối cùng của nhóm phần tử nhỏ hơn pivot
+    int i = low - 1;
+
+    // Duyệt từ đầu đến trước pivot
+    for(int j = low; j < high; j++){
+
+        // Nếu phần tử hiện tại nhỏ hơn pivot
+        if(arr[j] < pivot){
+
+            i++;
+
+            // Đưa phần tử nhỏ hơn pivot sang bên trái
+            swap(arr, i, j);
+        }
+    }
+
+    // Đưa pivot về đúng vị trí
+    swap(arr, i + 1, high);
+
+    return i + 1;
+}
+````
+
+
+
