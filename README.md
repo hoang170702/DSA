@@ -8,6 +8,7 @@ This project is divided into 2 main sections:
 - `1_string.md` — String fundamentals (String Pool, ==, equals, immutable, Anagram, Reverse, Palindrome, Patterns, Complexity)
 - `2_array.md` — Array fundamentals (ArrayList, Dynamic Array, Resize, Capacity, add() complexity)
 - `3_sort.md` — Sorting algorithms (Bubble, Selection, Insertion, Merge, Quick, Heap Sort)
+- `4_search.md` — Search algorithms (Linear Search, Binary Search, Lower Bound, Upper Bound)
 
 **Goal:** Understand the concepts and how they work
 
