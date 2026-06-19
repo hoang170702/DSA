@@ -61,3 +61,5 @@ public static int linearSearch(int[] arr, int target){
     return -1; 
 }
 ````
+
+## 2. Binary Search
