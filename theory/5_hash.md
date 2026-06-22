@@ -77,7 +77,7 @@ Ví dụ:
 -> đây chỉ là bước đầu của hashcode, theo dõi tiếp bước sau
 ````
 
-### 3.2 Cách tính hashCode 
+### 3.2 Hash Spreading
 ````
 -> Sau khi tính ra 96354
 
