@@ -35,7 +35,7 @@ Key
 ↓
 hashCode()
 ↓
-hash spreading
+hash spreading (XOR)
 ↓
 index = (n - 1) & hash
 ↓
@@ -77,7 +77,70 @@ Ví dụ:
 -> đây chỉ là bước đầu của hashcode, theo dõi tiếp bước sau
 ````
 
-###  3.2 Capacity
+### 3.2 Cách tính hashCode 
+````
+-> Sau khi tính ra 96354
+
+Làm tiếp bước thiếp theo spreading -> hash = h ^ (h >>> 16); 
+-> đi trộn bit, 96354 sẽ chuyển qua 1 dãy 32 bit
+
+Từ dãy 32 bit đó, ta lấy 16 bit đầu (dịch sang phải 16 bit) đi XOR với 16 bit cuối 
+
+````
+
+````
+Ví dụ:
+
+Giả sử:
+    h = 96354
+    Đổi sang nhị phân:
+        96354 = 00000000 00000001 01111000 01100010
+
+    Tách ra:
+        High 16 bit 00000000 00000001
+        Low 16 bit 01111000 01100010
+````
+
+````
+Bước 1: Dịch phải 16 bit (h >>> 16)
+
+Kết quả: 00000000 00000000 00000000 00000001
+
+vì: 00000000 00000001 01111000 01100010
+khi thực hiện (>>>>> 16 bit)
+
+sẽ thành: 00000000 00000000 00000000 00000001
+````
+
+````
+Bước 2: XOR
+Công thức : hash = h ^ (h >>> 16)
+
+Lấy: 00000000 00000001 01111000 01100010 (h)
+
+XOR với: 00000000 00000000 00000000 00000001 (h >>> 16)
+
+Quy tắc XOR:
+0 ^ 0 = 0
+0 ^ 1 = 1
+1 ^ 0 = 1
+1 ^ 1 = 0
+````
+
+````
+Thực hiện:
+
+00000000 00000001 01111000 01100010
+
+00000000 00000000 00000000 00000001
+-----------------------------------
+
+00000000 00000001 01111000 01100011
+
+Kết quả: 96355
+````
+
+###  3.3 Capacity
 ````
 Khi bạn khởi tạo 1 hashMap mới: new HashMap<>();
 
@@ -97,8 +160,33 @@ new HashMap<>(100) -> capacity thực tế thường là 128
 Vì HashMap muốn capacity dạng: 2^k
 ````
 
-### 3.3 Vấn đề thật sự (bước tiếp theo sau hashCode)
+### 3.4 Vấn đề thật sự (bước tiếp theo sau hashCode)
+````
+Ta có: 
+hashCode sau khi trộn = 96355
+capacity = 16 / 32 / 64 / 128 ...
 ````
 
 ````
+HashMap cần biến: 96355
+
+thành index hợp lệ: 0 → capacity - 1
+
+Ví dụ 
+-> nếu capacity = 16: index phải từ 0 → 15
+-> Nếu capacity = 32: index phải từ 0 → 31
+
+-> Tiếp tục đến với bước tiếp theo sau khi hiểu XOR và Capacity trong Hash
+````
+### 3.5 Bucket Index (Tính ra vị trí HashMap lưu object)
+````
+
+````
+
+
+
+
+
+
+
 
