@@ -141,6 +141,72 @@ LeetCode 125
 Longest substring
 ````
 
+# Interview
+````
+Câu 1
+String được lưu ở đâu?
+````
+
+````
+Câu 2
+Tại sao String được thiết kế immutable?
+````
+
+````
+Câu 3
+String, StringBuilder, StringBuffer khác nhau thế nào?
+````
+
+````
+Câu 4
+Output là gì?
+
+String a = "ABC";
+String b = "ABC";
+
+System.out.println(a == b); // true or false
+````
+
+
+````
+Câu 5
+Output là gì?
+
+String a = new String("ABC");
+String b = new String("ABC");
+
+System.out.println(a == b); // true or false
+````
+
+````
+Câu 6
+Output là gì?
+
+String a = new String("ABC");
+String b = "ABC";
+
+System.out.println(a.equals(b)); // true or false
+````
+
+````
+Câu 7
+intern() dùng để làm gì?
+````
+
+````
+Câu 8
+Tại sao HashMap thường dùng String làm key?
+````
+
+````
+Câu 9
+String concat có độ phức tạp bao nhiêu?
+````
+
+````
+Câu 10
+new String("ABC") tạo bao nhiêu object?
+````
 
 
 
