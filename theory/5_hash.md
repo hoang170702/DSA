@@ -180,8 +180,47 @@ Ví dụ
 ````
 ### 3.5 Bucket Index (Tính ra vị trí HashMap lưu object)
 ````
+hash sau khi spreading = 96355
+capacity default = 16
+
+
+HashMap cần biến: 96355
+thành:  bucket[0]
+        bucket[1]
+        ...
+        bucket[15]
+````
 
 ````
+HashMap dùng: index = (capacity - 1) & hash;
+
+Ví dụ:
+
+capacity default = 16
+
+thì: capacity - 1 = 15
+
+Đổi sang nhị phân: 15 = 0000 1111
+
+Thực hiện phép AND:
+hash = 96355 -> 00000000 00000001 01111000 01100011
+(capacity - 1) = 15 -> 00000000 00000000 00000000 00001111
+
+-> Theo công thức (capacity - 1) & hash
+-> ta có 
+    00000000 00000001 01111000 01100011
+    AND
+    00000000 00000000 00000000 00001111
+
+=   00000000 00000000 00000000 00000011 = 3 -> lưu vào bucket index 3
+
+````
+
+````
+Tìm hiểu thêm, vì sao % (index = hash % capacity;) cũng có thể tính ra đc index chính xác, nhưng lại không được dùng, mà lại dùng AND ?
+````
+
+## 4.Hash Collision 
 
 
 
