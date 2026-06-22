@@ -38,7 +38,36 @@ new ArrayList()
 ````
 
 
+## INTERVIEW
+````
+Câu 1 Array và ArrayList và List khác nhau thế nào?
+````
 
+````
+Câu 2 Tại sao ArrayList get(index) là O(1)?
+````
+
+````
+Câu 3 Tại sao add(index) là O(n)?
+````
+
+````
+Câu 4 ArrayList có thread-safe không?
+````
+
+````
+Câu 5 
+new ArrayList<>(1000) 
+có tạo sẵn 1000 object không?
+````
+
+````
+Câu 6 ArrayList và LinkedList nên dùng khi nào?
+````
+
+````
+Câu 7 Capacity và Size khác nhau thế nào?
+````
 
 
 
