@@ -72,8 +72,33 @@ Ví dụ:
 
 -> Nhưng 96354 vẫn chưa phải index.
 
--> Vì index của mảng phải nằm trong range: 0 → capacity - 1 ??? vầy thì làm sao để tính ra index ??? -> đây chỉ là bước đầu của hashcode, theo dõi tiếp bước sau
+-> Vì index của mảng phải nằm trong range: 0 → capacity - 1 
+??? vầy thì làm sao để tính ra index ??? 
+-> đây chỉ là bước đầu của hashcode, theo dõi tiếp bước sau
 ````
 
 ###  3.2 Capacity
+````
+Khi bạn khởi tạo 1 hashMap mới: new HashMap<>();
+
+-> default capacity là 16
+
+Nhưng capacity có thể là:
+new HashMap<>(32);
+new HashMap<>(64);
+new HashMap<>(100);
+
+-> nếu bạn không thích những con số là lũy thừa của 2 như: 16, 32, 64 ... .Bạn hoàn toàn có thể thay bằng những con số khác, nhưng hashMap sẽ chỉnh capacity nội bộ thành lũy thừa của 2 gần phù hợp.
+
+new HashMap<>(10)  -> capacity thực tế thường là 16
+new HashMap<>(17)  -> capacity thực tế thường là 32
+new HashMap<>(100) -> capacity thực tế thường là 128
+
+Vì HashMap muốn capacity dạng: 2^k
+````
+
+### 3.3 Vấn đề thật sự (bước tiếp theo sau hashCode)
+````
+
+````
 
