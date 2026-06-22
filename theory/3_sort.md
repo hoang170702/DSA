@@ -532,3 +532,51 @@ private static void heapify(int[] arr, int n, int root){
     }
 }
 ````
+
+## INTERVIEW
+````
+Câu 1
+Stable Sort là gì?
+````
+
+````
+Câu 2
+Những sort nào Stable?
+````
+
+````
+Câu 3
+Tại sao Quick Sort thường nhanh hơn Merge Sort
+dù cùng O(n log n)?
+````
+
+````
+Câu 4
+Tại sao Merge Sort cần O(n) memory?
+````
+
+````
+Câu 5
+Tại sao Quick Sort worst case O(n²)?
+````
+
+````
+Câu 6
+Sau khi partition xong,
+Quick Sort đảm bảo điều gì?
+````
+
+````
+Câu 7
+Tại sao TimSort dùng Insertion Sort?
+````
+
+````
+Câu 8
+TimSort dùng những thuật toán nào?
+````
+
+````
+Câu 9
+Tại sao Heap Sort thường chậm hơn Quick Sort?
+````
