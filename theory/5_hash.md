@@ -222,10 +222,240 @@ Tìm hiểu thêm, vì sao % (index = hash % capacity;) cũng có thể tính ra
 
 ## 4.Hash Collision 
 
+### 4.1 Collision là gì?
+````
+Collision xảy ra khi:
+
+Nhiều Key khác nhau
+↓
+Sau khi hash
+↓
+Rơi vào cùng Bucket
+````
+
+Ví dụ:
+````
+Key A
+↓
+hash
+↓
+bucket[1]
+````
+
+````
+Key B
+↓
+hash
+↓
+bucket[1]
+````
+
+````
+-> 2 key sau khi hash xong đều vào cùng 1 bucket để lưu object MẶC DÙ A != B
+
+=> Đó là Collision
+````
+
+### 4.2 Tại sao Collision luôn xảy ra?
+
+Lý Do:
+````
+HashMap
+
+capacity = 16
+
+bucket[0]
+bucket[1]
+...
+bucket[15]
+
+Tức là: chỉ có 16 bucket
+````
+
+Nhưng:
+````
+Key có thể là:
+
+"ABC"
+"XYZ"
+"user01"
+"user02"
+"user03"
+...
+
+Vô hạn
+````
+
+Nên:
+````
+Số Key >> Số Bucket
+
+=> Collision là điều chắc chắn xảy ra.
+````
+
+### 4.2.1 Lịch sử phát triển
+#### 4.2.1.1 Java 7 xử lý Collision thế nào?
+````
+Bucket
+↓
+LinkedList
+````
+
+````
+bucket[3]
+
+ABC
+ ↓
+XYZ
+ ↓
+DEF
+ ↓
+MNO
+````
+
+````
+map.get("DEF");
+
+bucket[3]
+
+ABC ? -> không
+XYZ ? -> không
+DEF ? -> có
+
+-> Complexity: O(n) -> phải đi lọc để tìm đúng key, nếu quá nhiều key vào 1 bucket sẽ rất tốn thời gian dù xài hash
+````
+
+#### 4.2.1.2 Java 8 cải tiến gì?
+Nếu LinkedList quá dài:
+````
+ABC
+ ↓
+XYZ
+ ↓
+DEF
+ ↓
+MNO
+ ↓
+...
+````
+
+Lookup sẽ ngày càng chậm:
+````
+O(n)
+````
+
+Nên Java 8 thêm:
+````
+Red Black Tree
+````
+
+Vậy khi nào thì hashmap sẽ biến linkedlist -> Red Black Tree (Treeify) ?
+
+````
+Node > 8
+
+và
+
+Capacity >= 64
+````
 
 
+Ví dụ:
+````
+bucket[3]
+
+A
+↓
+B
+↓
+C
+↓
+D
+↓
+E
+↓
+F
+↓
+G
+↓
+H
+↓
+I
+````
+
+Chuyển thành:
+````
+        D
+      /   \
+     B     G
+    / \   / \
+   A  C  F  I
+         /  /
+        E  H
+````
+
+Complexity:
+````
+LinkedList O(n) -> RedBlackTree O(log n)
+````
 
 
+## Interview
 
+````
+Câu 1 Tại sao HashMap phải thực hiện: hash = h ^ (h >>> 16); thay vì dùng trực tiếp hashCode()?
+````
 
+````
+Câu 2 Tại sao HashMap dùng: (capacity - 1) & hash mà không dùng: hash % capacity ?
+````
+
+````
+Câu 3 Tại sao capacity luôn là lũy thừa của 2? Nếu capacity = 15 hoặc 100 thì chuyện gì xảy ra?
+````
+
+````
+Câu 4 Hash Collision là gì? Tại sao Collision chắc chắn sẽ xảy ra?
+````
+
+````
+Câu 5 Java 7 xử lý Collision như thế nào? Nhược điểm?
+````
+
+````
+Câu 6 Java 8 cải tiến Collision như thế nào? Điều kiện để LinkedList chuyển thành RedBlackTree là gì?
+````
+
+````
+Câu 7 Tại sao phải thêm điều kiện: Capacity >= 64 mới được Treeify, sao không Treeify lúc capacity = 16 luôn?
+````
+
+````
+Câu 8 Nếu override equals() thì có cần override hashCode() không? Tại sao?
+````
+
+````
+Câu 9 equals() có vai trò gì khi xảy ra Collision?
+````
+
+````
+Câu 10 HashMap dùng hashCode() hay equals() trước? 
+Hai hàm này phối hợp với nhau như thế nào khi tìm kiếm một Key?
+````
+
+````
+Câu 11 Load Factor là gì? Mặc định bằng bao nhiêu? 
+````
+
+````
+Câu 12 Resize xảy ra khi nào? Resize chỉ copy mảng hay phải tính lại bucket của toàn bộ node?
+````
+
+````
+Câu 13 HashMap có thread-safe không? Nếu nhiều thread cùng put() thì dùng gì thay thế?
+````
+
+````
+Câu 14 HashSet hoạt động dựa trên cấu trúc dữ liệu nào? HashSet có lưu Value không?
+````
 
